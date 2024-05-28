@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('series');
-            $table->string('number');
+            $table->integer('number');
             $table->string('category');
             $table->timestamps();
         });

@@ -5,15 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Pop;
 use App\Http\Requests\StorePopRequest;
 use App\Http\Requests\UpdatePopRequest;
+use Illuminate\Http\Request;
 
 class PopController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pops.index');
+
+        $query = Pop::query();
+
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->sort, $request->direction);
+        }
+
+        $query = $query->orderBy('number', 'asc');
+        $pops = $query->paginate(10)->appends($request->query());
+
+        return view('pops.index', compact('pops') );
     }
 
     /**
@@ -37,7 +48,9 @@ class PopController extends Controller
      */
     public function show(Pop $pop)
     {
-        //
+        return view('pops.show', [
+            'pop' => $pop
+        ]);
     }
 
     /**
