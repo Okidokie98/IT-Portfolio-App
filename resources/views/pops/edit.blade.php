@@ -7,6 +7,15 @@
                         Edit Funko Pop
                         <hr/>
                     </h2>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('pops.update', $pop->id) }}">
                         @csrf
                         @method('PUT')
@@ -27,7 +36,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="category">POP Category</label>
-                                <input type="text" id="category" name="category" class="input" value="{{ $pop->category }}" required>
+                                <input type="text" id="category" name="category" class="form-control" value="{{ substr($pop->category, 5) }}" required>
                                 <small class="form-text text-muted">Format: Pop! xxx</small>
                             </div>
                         </div>
