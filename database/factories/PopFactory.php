@@ -91,6 +91,7 @@ class PopFactory extends Factory
 
 
         return [
+            'user_id' => fake()->numberBetween(1,2),
             'name' => fake()->randomElement($funkoPopNames),
             'series' => fake()->randomElement($series),
             'number' => fake()->numberBetween(1, 1450),

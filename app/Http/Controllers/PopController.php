@@ -6,6 +6,7 @@ use App\Models\Pop;
 use App\Http\Requests\StorePopRequest;
 use App\Http\Requests\UpdatePopRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PopController extends Controller
 {
@@ -15,7 +16,7 @@ class PopController extends Controller
     public function index(Request $request)
     {
 
-        $query = Pop::query();
+        $query = Pop::where('user_id', Auth::id());
 
         if ($request->has('sort') && $request->has('direction')) {
             $query->orderBy($request->sort, $request->direction);
@@ -32,15 +33,27 @@ class PopController extends Controller
      */
     public function create()
     {
-        //
+        return view('pops.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePopRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'series' => 'required|string|max:255',
+            'number' => 'required|integer|min:0',
+            'category' => 'required|string|max:255',
+        ]);
+
+        $validatedData['category'] = 'Pop! ' . $validatedData['category'];
+        $validatedData['user_id'] = Auth::id();
+
+        Pop::create($validatedData);
+
+        return redirect()->route('pops.index')->with('success', 'Funko Pop added successfully!');
     }
 
     /**
@@ -74,6 +87,8 @@ class PopController extends Controller
      */
     public function destroy(Pop $pop)
     {
-        //
+        $pop->delete();
+
+        return redirect()->route('pops.index')->with('success', 'Funko Pop deleted successfully!');
     }
 }

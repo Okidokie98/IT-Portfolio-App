@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pops', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('name');
             $table->string('series');
             $table->integer('number');

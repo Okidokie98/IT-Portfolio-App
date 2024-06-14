@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pop;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class PopSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Pop::factory(500)->create();
     }
 }

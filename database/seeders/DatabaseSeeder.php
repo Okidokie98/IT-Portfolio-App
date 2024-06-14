@@ -14,12 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         Pop::factory(50)->create();
+
+        $this->call(PopSeeder::class);
 
         User::factory()->create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => bcrypt('John1234'),
+        ]);
+
+        User::factory()->create([
+            'name' => 'Brandon de Baat',
+            'email' => 'brandon@example.com',
+            'password' => bcrypt('Okidokie98'),
         ]);
     }
 }

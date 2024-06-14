@@ -38,6 +38,18 @@
                 </div>
             </div>
 
+            <a href="{{ route('pops.edit', $pop->id) }}" class="button is-primary">
+                <i class="fa-solid fa-edit"></i>&nbsp; Edit Funko Pop
+            </a>
+
+            <form method="POST" action="{{ route('pops.destroy', $pop->id) }}" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this Funko Pop?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="button is-danger">
+                    <i class="fa-solid fa-trash"></i>&nbsp; Delete Funko Pop
+                </button>
+            </form>
+
         </div>
     </div>
 </x-app-layout>
