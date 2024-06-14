@@ -61,9 +61,7 @@ class PopController extends Controller
      */
     public function show(Pop $pop)
     {
-        return view('pops.show', [
-            'pop' => $pop
-        ]);
+        return view('pops.show', compact('pop'));
     }
 
     /**
@@ -71,15 +69,29 @@ class PopController extends Controller
      */
     public function edit(Pop $pop)
     {
-        //
+        return view('pops.edit', compact('pop'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePopRequest $request, Pop $pop)
+    public function update(Request $request, Pop $pop)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'series' => 'required|string|max:255',
+            'number' => 'required|integer|min:0',
+            'category' => 'required|string|max:255',
+        ]);
+
+        // Verwerk de categorie in het gewenste formaat "Pop! xxx"
+        $validatedData['category'] = 'Pop! ' . $validatedData['category'];
+
+        // Update de gevalideerde gegevens in de FunkoPop
+        $pop->update($validatedData);
+
+        // Redirect naar de index pagina met een succesmelding
+        return redirect()->route('pops.index')->with('success', 'Funko Pop updated successfully!');
     }
 
     /**
