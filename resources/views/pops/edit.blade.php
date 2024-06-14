@@ -36,8 +36,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="category">POP Category</label>
-                                <input type="text" id="category" name="category" class="form-control" value="{{ substr($pop->category, 5) }}" required>
-                                <small class="form-text text-muted">Format: Pop! xxx</small>
+                                <input type="text" id="category" name="category" class="input" value="{{ substr($pop->category, 5) }}" required>
                             </div>
                         </div>
                         <button type="submit" class="button is-primary mt-3">Update Funko Pop</button>
