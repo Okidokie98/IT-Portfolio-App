@@ -5,6 +5,7 @@
                 <div class="p-3 text-gray-900">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         Edit Funko Pop
+                        <hr/>
                     </h2>
                     <form method="POST" action="{{ route('pops.update', $pop->id) }}">
                         @csrf
@@ -12,21 +13,21 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">POP Name</label>
-                                <input type="text" id="name" name="name" class="form-control" value="{{ $pop->name }}" required>
+                                <input type="text" id="name" name="name" class="input" value="{{ $pop->name }}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="series">POP Series</label>
-                                <input type="text" id="series" name="series" class="form-control" value="{{ $pop->series }}" required>
+                                <input type="text" id="series" name="series" class="input" value="{{ $pop->series }}" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="number">POP Number</label>
-                                <input type="number" id="number" name="number" class="form-control" value="{{ $pop->number }}" min="0" required>
+                                <input type="number" id="number" name="number" class="input" value="{{ $pop->number }}" min="0" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="category">POP Category</label>
-                                <input type="text" id="category" name="category" class="form-control" value="{{ $pop->category }}" required>
+                                <input type="text" id="category" name="category" class="input" value="{{ $pop->category }}" required>
                                 <small class="form-text text-muted">Format: Pop! xxx</small>
                             </div>
                         </div>
