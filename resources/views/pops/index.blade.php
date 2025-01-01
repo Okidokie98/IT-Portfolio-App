@@ -33,8 +33,14 @@
 
             <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
                 <div class="p-6 text-gray-900">
-                    <h3>Aantal Funko Pops: </h3>
-                    {{$funkoCount}}
+                    <p>Aantal Funko Pops: {{$funkoCount}}</p>
+                    <p>Aantal unieke series: {{ $uniqueSeriesCount }}</p>
+                    <p>Meest voorkomende categorie: {{ $mostCommonCategory->category }} ({{ $mostCommonCategory->count }}x)</p>
+                    <p>Meest voorkomende serie: {{ $mostCommonSeries->series }} ({{ $mostCommonSeries->count }}x)</p>
+                    <p>Nieuwste Funko Pop: {{ $newestPop->name ?? 'Geen data' }}</p>
+                    <p>Hoogste nummer: {{ $highestNumberData->number }} ({{ $highestNumberData->count }}x)</p>
+                    <p>Laagste nummer: {{ $lowestNumberData->number }} ({{ $lowestNumberData->count }}x)</p>
+
                 </div>
             </div>
 

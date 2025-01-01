@@ -15,4 +15,10 @@ class Pop extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //Mutator for the Name column
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtoupper($value);
+    }
 }
