@@ -13,10 +13,53 @@ class PopController extends Controller
     private function getStatistics()
     {
         $user = Auth::user();
-        $funkoCount = Pop::where('user_id', $user->id)->count();
 
-        return compact('funkoCount');
+        // Basisstatistieken
+        $funkoCount = Pop::where('user_id', $user->id)->count();
+        $mostCommonCategory = Pop::where('user_id', $user->id)
+            ->select('category', \DB::raw('COUNT(*) as count'))
+            ->groupBy('category')
+            ->orderByDesc('count')
+            ->first();
+        $uniqueSeriesCount = Pop::where('user_id', $user->id)->distinct('series')->count('series');
+        $averageNumber = Pop::where('user_id', $user->id)->avg('number');
+        $newestPop = Pop::where('user_id', $user->id)->latest()->first();
+
+        // Hoogste nummer en aantal keren
+        $highestNumberData = Pop::where('user_id', $user->id)
+            ->select('number', \DB::raw('COUNT(*) as count'))
+            ->groupBy('number')
+            ->orderByDesc('number')
+            ->first();
+
+        // Laagste nummer en aantal keren
+        $lowestNumberData = Pop::where('user_id', $user->id)
+            ->select('number', \DB::raw('COUNT(*) as count'))
+            ->groupBy('number')
+            ->orderBy('number', 'asc')
+            ->first();
+
+        // Meest voorkomende serie en aantal keren
+        $mostCommonSeries = Pop::where('user_id', $user->id)
+            ->select('series', \DB::raw('COUNT(*) as count'))
+            ->groupBy('series')
+            ->orderByDesc('count')
+            ->first();
+
+        return compact(
+            'funkoCount',
+            'mostCommonCategory',
+            'uniqueSeriesCount',
+            'averageNumber',
+            'newestPop',
+            'highestNumberData',
+            'lowestNumberData',
+            'mostCommonSeries'
+        );
     }
+
+
+
 
     public function showStats()
     {
