@@ -10,12 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class PopController extends Controller
 {
+    private function getStatistics()
+    {
+        $user = Auth::user();
+        $funkoCount = Pop::where('user_id', $user->id)->count();
+
+        return compact('funkoCount');
+    }
+
+    public function showStats()
+    {
+        // Haal statistieken op via de helperfunctie
+        $stats = $this->getStatistics();
+
+        return view('pops.stats', $stats);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-
         $query = Pop::where('user_id', Auth::id());
 
         if ($request->has('sort') && $request->has('direction')) {
@@ -25,7 +40,10 @@ class PopController extends Controller
         $query = $query->orderBy('number', 'asc');
         $pops = $query->paginate(10)->appends($request->query());
 
-        return view('pops.index', compact('pops') );
+        // Haal statistieken op via de helperfunctie
+        $stats = $this->getStatistics();
+
+        return view('pops.index', array_merge(['pops' => $pops], $stats));
     }
 
     /**

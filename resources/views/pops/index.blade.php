@@ -2,7 +2,7 @@
     <x-notification.notification />
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-3">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
                 <div class="p-3 text-gray-900">
                     <details>
                         <summary>Sorteren</summary>
@@ -31,19 +31,20 @@
                 </div>
             </div>
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-3">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
                 <div class="p-6 text-gray-900">
-                    Hello
+                    <h3>Aantal Funko Pops: </h3>
+                    {{$funkoCount}}
                 </div>
             </div>
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-3">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
                 <a href="{{ route('pops.create') }}" class="button is-primary">
-                    <i class="fa-solid fa-plus"></i>&nbsp; Add a new Funko Pop!
+                    <i class="fa-solid fa-plus"></i>&nbsp; Voeg een nieuwe Funko Pop toe!
                 </a>
             </div>
 
-            <div class="bg-white shadow-sm sm:rounded-lg m-3">
+            <div class="bg-white shadow-sm rounded-lg m-3 overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                     <tr>
