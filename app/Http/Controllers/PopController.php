@@ -66,6 +66,7 @@ class PopController extends Controller
             'category' => 'required|string|max:255',
         ]);
 
+        $validatedData['name'] = strtoupper($validatedData['name']);
         $validatedData['category'] = 'Pop! ' . $validatedData['category'];
         $validatedData['user_id'] = Auth::id();
 
@@ -103,6 +104,7 @@ class PopController extends Controller
         ]);
 
         // Verwerk de categorie in het gewenste formaat "Pop! xxx"
+        $validatedData['name'] = strtoupper($validatedData['name']);
         $validatedData['category'] = 'Pop! ' . $validatedData['category'];
 
         // Update de gevalideerde gegevens in de FunkoPop
