@@ -81,7 +81,7 @@ class PopController extends Controller
         }
 
         $query = $query->orderBy('number', 'asc');
-        $pops = $query->paginate(10)->appends($request->query());
+        $pops = $query->paginate(25)->appends($request->query());
 
         // Haal statistieken op via de helperfunctie
         $stats = $this->getStatistics();
