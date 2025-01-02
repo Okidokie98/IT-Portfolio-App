@@ -62,7 +62,7 @@
                     </thead>
                     <tbody>
                     @foreach ($pops as $pop)
-                        <x-pops.table-row :pop="$pop" class="odd:bg-gray-300 even:bg-gray-100"/>
+                        <x-pops.table-row :pop="$pop" class="odd:bg-gray-300 even:bg-gray-100 hover:bg-green-200"/>
                     @endforeach
                     </tbody>
                 </table>
