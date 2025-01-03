@@ -51,6 +51,10 @@
 
                 <form method="GET" action="{{ route('pops.index') }}">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Zoeken..." class="form-input w-1/4 ml-1 mr-1 mt-1 mb-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                    <label class="ml-1 mr-1 mt-1 mb-1">
+                        <input type="checkbox" name="exact" value="1" {{ request('exact') ? 'checked' : '' }} class="form-checkbox rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                        <span class="ml-2">Exacte match</span>
+                    </label>
                     <button type="submit" class="button is-family-secondary ml-1 mr-1 mt-1 mb-1">Zoeken</button>
                 </form>
 

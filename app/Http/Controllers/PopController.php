@@ -77,15 +77,27 @@ class PopController extends Controller
         $query = Pop::where('user_id', Auth::id());
 
         // Controleer of er een zoekterm is
+        // Controleer of er een zoekterm is
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
 
-            $query->where(function ($subQuery) use ($searchTerm) {
-                $subQuery->where('name', 'like', "%$searchTerm%")
-                    ->orWhere('series', 'like', "%$searchTerm%")
-                    ->orWhere('category', 'like', "%$searchTerm%")
-                    ->orWhere('number', 'like', "%$searchTerm%");
-            });
+            if ($request->has('exact')) {
+                // Exacte match
+                $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('name', $searchTerm)
+                        ->orWhere('series', $searchTerm)
+                        ->orWhere('category', $searchTerm)
+                        ->orWhere('number', $searchTerm);
+                });
+            } else {
+                // Like-match
+                $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('name', 'like', "%$searchTerm%")
+                        ->orWhere('series', 'like', "%$searchTerm%")
+                        ->orWhere('category', 'like', "%$searchTerm%")
+                        ->orWhere('number', 'like', "%$searchTerm%");
+                });
+            }
         }
 
         if ($request->has('sort') && $request->has('direction')) {
