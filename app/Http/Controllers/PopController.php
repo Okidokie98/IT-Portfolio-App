@@ -77,26 +77,32 @@ class PopController extends Controller
         $query = Pop::where('user_id', Auth::id());
 
         // Controleer of er een zoekterm is
-        // Controleer of er een zoekterm is
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
+            $isExact = $request->has('exact'); // Controleer of exacte match is aangevinkt
 
-            if ($request->has('exact')) {
-                // Exacte match
-                $query->where(function ($subQuery) use ($searchTerm) {
-                    $subQuery->where('name', $searchTerm)
-                        ->orWhere('series', $searchTerm)
-                        ->orWhere('category', $searchTerm)
-                        ->orWhere('number', $searchTerm);
-                });
+            // Controleer of de zoekterm numeriek is
+            if (is_numeric($searchTerm)) {
+                if ($isExact) {
+                    $query->where('number', $searchTerm);
+                } else {
+                    $query->where('number', 'like', "%$searchTerm%");
+                }
             } else {
-                // Like-match
-                $query->where(function ($subQuery) use ($searchTerm) {
-                    $subQuery->where('name', 'like', "%$searchTerm%")
-                        ->orWhere('series', 'like', "%$searchTerm%")
-                        ->orWhere('category', 'like', "%$searchTerm%")
-                        ->orWhere('number', 'like', "%$searchTerm%");
-                });
+                // Zoek alleen in relevante velden voor niet-numerieke zoektermen
+                if ($isExact) {
+                    $query->where(function ($subQuery) use ($searchTerm) {
+                        $subQuery->where('name', $searchTerm)
+                            ->orWhere('series', $searchTerm)
+                            ->orWhere('category', $searchTerm);
+                    });
+                } else {
+                    $query->where(function ($subQuery) use ($searchTerm) {
+                        $subQuery->where('name', 'like', "%$searchTerm%")
+                            ->orWhere('series', 'like', "%$searchTerm%")
+                            ->orWhere('category', 'like', "%$searchTerm%");
+                    });
+                }
             }
         }
 
