@@ -60,6 +60,19 @@
 
             </div>
 
+            @if (request('search'))
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
+                <div class="p-3 text-gray-900">
+                <p>
+                    {{ $pops->total() }} POP(s) gevonden
+
+                        voor "{{ request('search') }}"
+
+                </p>
+                </div>
+            </div>
+            @endif
+
             <div class="bg-white shadow-sm rounded-lg m-3 overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
