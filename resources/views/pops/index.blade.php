@@ -45,9 +45,15 @@
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm rounded-lg m-3">
-                <a href="{{ route('pops.create') }}" class="button is-primary">
+                <a href="{{ route('pops.create') }}" class="button is-primary ml-1 mr-1 mt-1 mb-1">
                     <i class="fa-solid fa-plus"></i>&nbsp; Voeg een nieuwe Funko Pop toe!
                 </a>
+
+                <form method="GET" action="{{ route('pops.index') }}">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Zoeken..." class="form-input w-1/4 ml-1 mr-1 mt-1 mb-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                    <button type="submit" class="button is-family-secondary ml-1 mr-1 mt-1 mb-1">Zoeken</button>
+                </form>
+
             </div>
 
             <div class="bg-white shadow-sm rounded-lg m-3 overflow-x-auto">
