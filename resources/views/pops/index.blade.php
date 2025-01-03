@@ -71,9 +71,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($pops as $pop)
+                    @forelse ($pops as $pop)
                         <x-pops.table-row :pop="$pop" class="odd:bg-gray-300 even:bg-gray-100 hover:bg-green-200"/>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4">Geen resultaten gevonden</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 {{ $pops->links() }}
