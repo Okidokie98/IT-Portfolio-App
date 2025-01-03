@@ -37,7 +37,7 @@
                     <p>Aantal unieke series: {{ $uniqueSeriesCount }}</p>
                     <p>Meest voorkomende categorie: {{ $mostCommonCategory->category }} ({{ $mostCommonCategory->count }}x)</p>
                     <p>Meest voorkomende serie: {{ $mostCommonSeries->series }} ({{ $mostCommonSeries->count }}x)</p>
-                    <p>Nieuwste Funko Pop: <a href="{{ route('pops.show', $newestPop->id) }}">{{ $newestPop->name ?? 'Geen data' }}</a></p>
+                    <p>Nieuwste Funko Pop: <a href="{{ route('pops.show', $newestPop->id) }}">{{ $newestPop->name ?? 'Geen data' }}</a> ("{{ $newestPop->series }}")</p>
                     <p>Hoogste nummer: {{ $highestNumberData->number }} ({{ $highestNumberData->count }}x)</p>
                     <p>Laagste nummer: {{ $lowestNumberData->number }} ({{ $lowestNumberData->count }}x)</p>
 
