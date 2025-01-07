@@ -12,7 +12,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">POP Name</label>
-                                <input type="text" id="name" name="name" class="input" value="{{ old('name') }}" required>
+                                <input type="text" id="name" name="name" class="input" value="{{ old('name') }}" required autofocus>
                                 <span>
                                     <i class="fas fa-envelope"></i>
                                 </span>
